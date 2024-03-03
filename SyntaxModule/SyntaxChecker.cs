@@ -1,5 +1,4 @@
-﻿
-using MaiChartLib.Enum;
+﻿using MaiChartLib.Enum;
 
 namespace MaiChartLib.SyntaxModule;
 enum InfomationLevel
@@ -994,14 +993,14 @@ internal static class SyntaxChecker
     /// </summary>
     /// <param name="s"></param>
     /// <returns></returns>
-    static bool IsNum(string s) => IsInteger(s) || IsFloat(s);
-    static bool IsInteger(string s) => int.TryParse(s, out int i);
-    static bool IsFloat(string s) => double.TryParse(s, out double i);
+    internal static bool IsNum(string s) => IsInteger(s) || IsFloat(s);
+    internal static bool IsInteger(string s) => int.TryParse(s, out int i);
+    internal static bool IsFloat(string s) => double.TryParse(s, out double i);
     /// <summary>
     /// 用于判断键位是否合法
     /// </summary>
     /// <param name="k"></param>
     /// <returns></returns>
-    static bool PointCheck(int k) => k >= 1 && k <= 8;
+    internal static bool PointCheck(int k) => k >= 1 && k <= 8;
 
 }

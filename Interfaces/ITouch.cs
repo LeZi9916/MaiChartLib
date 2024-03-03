@@ -5,6 +5,6 @@ internal interface ITouch : INote
 {
     SensorType Sensor { get; set; }
     bool SFX { get; set; }
-    new bool isEx { get; }
-    new bool isBreak { get; }
+    new bool IsEx { get; }
+    new bool IsBreak { get; }
 }

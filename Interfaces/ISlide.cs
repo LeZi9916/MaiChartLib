@@ -1,14 +1,14 @@
-﻿
-using MaiChartLib.Enum;
+﻿using MaiChartLib.Note;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MaiChartLib.Interfaces;
-internal interface ISlide : INote
+namespace MaiChartLib.Interfaces
 {
-    int Length { get; set; }
-    double StartInterval { get; set; }
-    int EndPoint { get; set; }
-    int? FlexionPoint { get; set; }
-    new SlideType Type { get; set; }
-    new bool isEx { get; }
-    new double HSpeed { get; }
+    internal interface ISlide : INote
+    {
+        SlidePath[]? Path { get; set; }
+    }
 }
