@@ -9,9 +9,9 @@ internal interface INote
     bool isEx { get; set; }
     double HSpeed { get; set; }
 
-    INote Parse(string noteStr);
+    abstract static INote? ToNote(string noteStr);
 }
 internal interface INote<T> : INote where T : INote
 {
-    new T Parse(string noteStr);
+    abstract static T? Parse(string noteStr);
 }

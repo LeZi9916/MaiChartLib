@@ -1,4 +1,6 @@
 ﻿
+using MaiChartLib.Enum;
+
 namespace MaiChartLib.SyntaxModule;
 enum InfomationLevel
 {
@@ -19,14 +21,6 @@ enum DirectionType
     /// 逆时针
     /// </summary>
     Anticlockwise
-}
-internal enum SimaiNoteType
-{
-    Tap,
-    Slide,
-    Hold,
-    Touch,
-    TouchHold
 }
 public class ErrorInfo
 {
@@ -822,16 +816,16 @@ internal static class SyntaxChecker
     /// <returns>
     /// Note的类型，若不是合法Note语句，返回null
     /// </returns>
-    static SimaiNoteType? IsNote(string s)
+    internal static NoteType? IsNote(string s)
     {
         if (IsTap(s))
-            return SimaiNoteType.Tap;
+            return NoteType.Tap;
         else if (IsHold(s))
-            return SimaiNoteType.Hold;
+            return NoteType.Hold;
         else if (IsSlide(ref s))
-            return SimaiNoteType.Slide;
+            return NoteType.Slide;
         else if (IsTouch(s))
-            return SimaiNoteType.Touch;
+            return NoteType.Touch;
         else
             return null;
     }
