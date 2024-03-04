@@ -1,7 +1,7 @@
 ﻿using MaiChartLib.Enum;
 using MaiChartLib.Interfaces;
 
-namespace MaiChartLib.Note;
+namespace MaiChartLib.Notes;
 
 internal class SlidePath :ISlidePath
 {
@@ -15,5 +15,5 @@ internal class SlidePath :ISlidePath
     public bool IsBreak { get; set; }
     public double HSpeed { get => -1; set => throw new NotSupportedException(""); }
     public int StartPoint { get; set; }
-    public static INote ToNote(string s) => throw new NotSupportedException("");
+    public static INote[]? ToNote(string s) => throw new NotSupportedException("");
 }

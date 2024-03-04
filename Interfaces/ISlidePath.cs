@@ -1,6 +1,6 @@
 ﻿
 using MaiChartLib.Enum;
-using MaiChartLib.Note;
+using MaiChartLib.Notes;
 
 namespace MaiChartLib.Interfaces;
 internal interface ISlidePath : INote

@@ -1,7 +1,7 @@
 ﻿using MaiChartLib.Enum;
 using MaiChartLib.Interfaces;
 
-namespace MaiChartLib.Note;
+namespace MaiChartLib.Notes;
 
 internal class Slide : Tap,ISlide
 {

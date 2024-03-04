@@ -4,7 +4,7 @@ using MaiChartLib.Interfaces;
 using MaiChartLib.SyntaxModule;
 using System;
 
-namespace MaiChartLib.Note
+namespace MaiChartLib.Notes
 {
     internal class Tap : INote<Tap>
     {
