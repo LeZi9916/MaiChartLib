@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MaiChartLib.Notes
 {
-    internal class Hold : IHold,INote<Hold>
+    internal class Hold : IHold
     {
         public long Length { get; set; }
         public int StartPoint { get; set; }
@@ -16,11 +16,11 @@ namespace MaiChartLib.Notes
         public bool IsBreak {  get; set; }
         public bool IsHanabi { get; set; }
         public double HSpeed { get; set; }
-        public static Tap[]? Parse(string s)
+        public static Hold? Parse(string holdStr)
         {
-
+            return null;
         }
-        public static INote[]? ToNote(string s)
+        public static INote? ToNote(string s)
         {
             return null;
         }
