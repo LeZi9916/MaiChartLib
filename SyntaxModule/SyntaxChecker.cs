@@ -1,4 +1,6 @@
 ﻿using MaiChartLib.Enum;
+using MaiChartLib.Interfaces;
+using MaiChartLib.Notes;
 
 namespace MaiChartLib.SyntaxModule;
 enum InfomationLevel
@@ -817,7 +819,8 @@ internal static class SyntaxChecker
     /// </returns>
     internal static NoteType? IsNote(string s)
     {
-        if (IsTap(s))
+        Tap note;
+        if (IsTap(s,out note))
             return NoteType.Tap;
         else if (IsHold(s))
             return NoteType.Hold;
@@ -833,15 +836,17 @@ internal static class SyntaxChecker
     /// </summary>
     /// <param name="s"></param>
     /// <returns></returns>
-    static bool IsTap(string s)
+    static bool IsTap(string s,out Tap? tap)
     {
         int index;
-
+        bool isSlide = false;
+        tap = null;
+        
         if (!int.TryParse(s[0..1], out index))//总是检查第1位
             return false;
         if (!PointCheck(index))//错误键位直接返回
             return false;
-
+        
         if (s.Contains("$"))
         {
             var f = s.IndexOf("$");
@@ -853,22 +858,48 @@ internal static class SyntaxChecker
                 s = s.Remove(1, 2);
             else
                 return false;
+            isSlide = true;
         }
-
+        
+        if(isSlide)
+            tap = Tap.Init<Star>(0);
+        else
+            tap = Tap.Init<Tap>(0);
+        
         if (s.Length == 1)
+        {
+            tap.StartPoint = int.Parse(s);
             return true;
+        }
         else if (s.Length == 2)// e.g. 28 , 2b , 2x
         {
             if (s[1] is ('b' or 'x'))
+            {
+                switch (s[1])
+                {
+                    case 'b':
+                        tap.IsBreak = true;
+                        break;
+                    case 'x':
+                        tap.IsHanabi = true;
+                        break;
+                }
                 return true;
+            }
             else
-                return int.TryParse(s, out int i) && (PointCheck(i % 10) && PointCheck(i / 10));
+            {
+                tap = null;
+                return false;
+            }
         }
         else if (s.Length == 3)// e.g. 2bx
         {
             var isBreak = s[1] is 'b' || s[2] is 'b';
             var isHanabi = s[1] is 'x' || s[2] is 'x';
 
+            tap.IsBreak = isBreak;
+            tap.IsHanabi = isHanabi;
+            
             return isBreak && isHanabi;
         }
 
@@ -879,9 +910,10 @@ internal static class SyntaxChecker
     /// </summary>
     /// <param name="s"></param>
     /// <returns></returns>
-    static bool IsHold(string s)
+    static bool IsHold(string s,out Hold? hold)
     {
         int index = 0;
+        hold = null;
         var _s = s.Split("[");
         string header = _s[0];
         bool isTouch = header[0] == 'C';
